@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saven Bytes</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+
+/* ===== BASE ===== */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background:linear-gradient(135deg, #ff6f3c, #ff9a3c);
+  color: #333;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; }
+
+/* ===== Animated Scroll Down ===== */
+.scroll-down {
+  text-align: center;
+  margin: 30px 0 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ff5722;
+  cursor: pointer;
+  animation: pulse 1.8s infinite ease-in-out;
+}
+.scroll-down .arrow {
+  display: block;
+  font-size: 2rem;
+  margin-top: 6px;
+  animation: bounce 1.6s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+
+/* ===== HEADING ===== */
+.animated-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 60px 0 15px;
+  color: rgb(255, 255, 255);
+}
+
+.better-food {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: rgb(255, 255, 255);
+}
+
+/* ===== FEATURES ===== */
+.features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 40px 8%;
+}
+.features .item {
+  text-align: center;
+  background: #fafafa;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  width: 160px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.features .item:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0px 8px 18px rgba(0,0,0,0.12);
+}
+.features .item img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+.features .item p {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #444;
+}
+
+/* ===== LOGIN SECTION ===== */
+.login-section {
+  padding: 60px 8%;
+  text-align: center;
+}
+.login-card {
+  background: #fafafa;
+  padding: 36px 26px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  max-width: 380px;
+  margin: auto;
+  transition: transform 0.5s ease;
+}
+.login-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.login-card h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.7rem;
+  color: #ff5722;
+  margin-bottom: 20px;
+}
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+.input-group input {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #ccc;
+  padding: 12px 8px;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.input-group label {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  color: #777;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+  top: -8px;
+  font-size: 0.78rem;
+  color: #ff5722;
+}
+.input-group input:focus {
+  border-bottom: 2px solid #ff5722;
+}
+.login-card button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #ff6f3c, #ff3b3f);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+.login-card button:hover {
+  filter: brightness(1.15);
+}
+.login-card a {
+  color: #ff6f3c;
+  font-weight: 600;
+}
+
+/* ===== FOOTER STYLES ===== */
+footer {
+  background: #f9f9f9;
+  color: #333;
+  padding: 40px 8%;
+  border-top: 1px solid #ddd;
+}
+footer .footer-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-col h4 {
+  color: #ff5722;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+footer .footer-col a {
+  display: block;
+  color: #333;
+  margin: 6px 0;
+  font-size: 0.95rem;
+  position: relative;
+  padding-bottom: 2px;
+}
+footer .footer-col a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #ff5722;
+  transition: width 0.3s ease;
+}
+footer .footer-col a:hover::after {
+  width: 100%;
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: #555;
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+<!-- SESSION MESSAGE CARD -->
+<div id="sessionAlert" style="
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: #ffffff;
+  padding: 18px 26px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 9999;
+  animation: popIn 0.6s ease forwards;
+">
+  <h4 id="alertTitle" style="margin:0;color:#ff3b3f;font-family:Montserrat;">
+    Login Required
+  </h4>
+  <p id="alertMsg" style="margin:4px 0 0;font-size:0.95rem;">
+    Please login to continue.
+  </p>
+</div>
+
+
+<!-- MAIN CONTENT -->
+<div class="animated-title" data-aos="fade-down">
+  SAVEN BYTES
+</div>
+
+<div class="better-food" data-aos="fade-up" data-aos-delay="200">
+  Better food for more people
+</div>
+
+<section class="features">
+  <div class="item" data-aos="fade-right" data-aos-delay="100">
+    <img src="webcontent/icons/pizza.png" alt="Pizza">
+    <p>Delicious Pizza</p>
+  </div>
+  <div class="item" data-aos="fade-left" data-aos-delay="200">
+    <img src="webcontent/icons/burger.png" alt="Burger">
+    <p>Juicy Burgers</p>
+  </div>
+  <div class="item" data-aos="fade-right" data-aos-delay="300">
+    <img src="webcontent/icons/sushi.png" alt="Sushi">
+    <p>Fresh Sushi</p>
+  </div>
+  <div class="item" data-aos="fade-left" data-aos-delay="400">
+    <img src="webcontent/icons/juice.png" alt="Drinks">
+    <p>Cold Drinks</p>
+  </div>
+</section>
+
+<!-- SCROLL DOWN INDICATOR -->
+<div class="scroll-down" data-aos="fade-up" data-aos-delay="500" onclick="document.getElementById('login').scrollIntoView({ behavior: 'smooth' })">
+  Scroll to Login
+  <span class="arrow">⬇️</span>
+</div>
+	
+<form action="userlog" method="post">
+<section class="login-section" id="login" data-aos="zoom-in">
+  <div class="login-card" data-aos="fade-up" data-aos-delay="250">
+    <h2>Login</h2>
+    <div class="input-group">
+      <input type="text" placeholder=" " name="username" required>
+      <label>Username</label>
+    </div>
+    <div class="input-group">
+      <input type="password" placeholder=" " name="password" required>
+      <label>Password</label>
+    </div>
+    <button>Sign In</button>
+    <p>New user? <a href="Registration.html">Register</a></p>
+  </div>
+</section>
+</form>
+
+<!-- FOOTER -->
+<footer data-aos="fade-up" data-aos-delay="300">
+  <div class="footer-flex">
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="#">Our Story</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Contact</a>
+      <a href="#">FAQs</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+    <div class="footer-col social-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-twitter"></i>
+      </div>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2025 Saven Bytes • All Rights Reserved</p>
+</footer>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+</script>
+
+<!-- Font Awesome for Social Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const reason = params.get("reason");
+
+  if (reason) {
+    const alertBox = document.getElementById("sessionAlert");
+    const title = document.getElementById("alertTitle");
+    const msg = document.getElementById("alertMsg");
+
+    if (reason === "expired") {
+      title.innerText = "Session Expired";
+      msg.innerText = "Your session expired. Please login again.";
+    } else if (reason === "login") {
+      title.innerText = "Login Required";
+      msg.innerText = "You must login to access that page.";
+    }
+
+    alertBox.style.display = "block";
+
+    // auto-hide after 4 sec
+    setTimeout(() => {
+      alertBox.style.display = "none";
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>

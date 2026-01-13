@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saven Bytes Registration</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+
+/* ===== BASE ===== */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: #333;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== ANIMATED BACKGROUND ICONS ===== */
+@keyframes floatUpDown {
+  0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+  50% { transform: translateY(-20px) translateX(5px) rotate(5deg); opacity: 1; }
+  100% { transform: translateY(0) translateX(0); opacity: 0.8; }
+}
+.floating-icon {
+  position: absolute;
+  width: 90px;
+  opacity: 0.7;
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+/* icons around the card */
+#icon1 { top: 15%; left: 8%; animation-delay: 0s; }
+#icon2 { top: 25%; right: 8%; animation-delay: 1s; }
+#icon3 { bottom: 20%; left: 6%; animation-delay: 1.5s; }
+#icon4 { bottom: 18%; right: 10%; animation-delay: 0.8s; }
+
+/* ===== PAGE TITLE ===== */
+.page-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 60px 0 15px;
+  color: #ff5722;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: #ff6f3c;
+}
+
+/* ===== FORM ===== */
+.reg-section {
+  padding: 40px 8%;
+  text-align: center;
+  position: relative;
+}
+
+.reg-card {
+  background: #fafafa;
+  padding: 36px 26px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  max-width: 480px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.reg-card h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  color: #ff5722;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+.input-group input,
+.input-group select {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #ccc;
+  padding: 12px 8px;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-group label {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  color: #777;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group select:focus ~ label,
+.input-group select:not([value=""]) ~ label {
+  top: -8px;
+  font-size: 0.78rem;
+  color: #ff5722;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-bottom: 2px solid #ff5722;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #ff6f3c, #ff3b3f);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+button:hover {
+  filter: brightness(1.15);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating Food Icons -->
+<img src="webcontent/icons/pizza.png" id="icon1" class="floating-icon" alt="Pizza">
+<img src="webcontent/icons/burger.png" id="icon2" class="floating-icon" alt="Burger">
+<img src="webcontent/icons/sushi.png" id="icon3" class="floating-icon" alt="Sushi">
+<img src="webcontent/icons/juice.png" id="icon4" class="floating-icon" alt="Drinks">
+
+<div class="page-title" data-aos="fade-down">
+  CREATE AN ACCOUNT
+</div>
+<div class="subtitle" data-aos="fade-up" data-aos-delay="150">
+  Join Saven Bytes
+</div>
+
+<section class="reg-section">
+  <div class="reg-card" data-aos="zoom-in">
+    <h2>Register</h2>
+
+    <form action="user_register" method="post">
+
+      <div class="input-group">
+        <input type="text" name="username" placeholder=" " required>
+        <label>Username</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="password" placeholder=" " required>
+        <label>Password</label>
+      </div>
+
+      <div class="input-group">
+        <input type="email" name="email" placeholder=" " required>
+        <label>Email</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" name="phone" placeholder=" " required>
+        <label>Phone</label>
+      </div>
+
+      <div class="input-group">
+        <input type="text" name="address" placeholder=" " required>
+        <label>Address</label>
+      </div>
+
+      <!-- role defaulted to customer -->
+      <input type="hidden" name="role" value="customer">
+
+      <button type="submit">Register</button>
+    </form>
+
+  </div>
+</section>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true });
+</script>
+
+</body>
+</html>

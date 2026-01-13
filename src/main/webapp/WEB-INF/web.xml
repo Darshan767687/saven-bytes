@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    xmlns="https://jakarta.ee/xml/ns/jakartaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                        https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+    version="6.0">
+
+    <display-name>SAVEN_BITES</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- LOGIN -->
+    <servlet>
+        <servlet-name>USER_LOG</servlet-name>
+        <servlet-class>com.saven.user_Login_servlets.User_Login_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>USER_LOG</servlet-name>
+        <url-pattern>/userlog</url-pattern>
+    </servlet-mapping>
+
+    <!-- REGISTER -->
+    <servlet>
+        <servlet-name>USER_REG</servlet-name>
+        <servlet-class>com.saven.user_Login_servlets.User_Register_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>USER_REG</servlet-name>
+        <url-pattern>/user_register</url-pattern>
+    </servlet-mapping>
+
+    <!-- RESTAURANT DISPLAY -->
+    <servlet>
+        <servlet-name>REST_DISP</servlet-name>
+        <servlet-class>com.saven.restaurant_servlets.restaurnat_servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>REST_DISP</servlet-name>
+        <url-pattern>/restdisp</url-pattern>
+    </servlet-mapping>
+    
+    <!-- RESTAURANTS FILTER -->
+    <servlet>
+    		<servlet-name>REST_FILTER</servlet-name>
+    		<servlet-class>com.saven.restaurant_servlets.Restaurants_filter_servlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    		<servlet-name>REST_FILTER</servlet-name>
+    		<url-pattern>/restfilter</url-pattern>
+    </servlet-mapping>
+    
+    <!-- MENU LIST -->
+    <servlet>
+    		<servlet-name>MENU_LIST</servlet-name>
+    		<servlet-class>com.saven.menu_Servlet.Menu_List_Servlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    		<servlet-name>MENU_LIST</servlet-name>
+    		<url-pattern>/menu</url-pattern>
+    </servlet-mapping>
+
+</web-app>
