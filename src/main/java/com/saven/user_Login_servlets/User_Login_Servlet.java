@@ -24,7 +24,6 @@ public class User_Login_Servlet extends HttpServlet {
 
         User user = User_Service.getUser(username);
 
-        // 🔥 SAFE NULL HANDLING
         if (user != null && user.getPassword() != null) {
 
             if (user.getPassword().equals(password)) {
