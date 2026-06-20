@@ -10,27 +10,23 @@ public class ConnectionClass {
         Connection con = null;
 
         try {
-
-            // Load MySQL Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String host = System.getenv("MYSQLHOST");
-            String port = System.getenv("MYSQLPORT");
-            String database = System.getenv("MYSQLDATABASE");
+            String rawUrl = System.getenv("MYSQL_URL");
             String user = System.getenv("MYSQLUSER");
             String pass = System.getenv("MYSQLPASSWORD");
 
-            String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
+            System.out.println("RAW MYSQL_URL: " + rawUrl);
 
-            System.out.println("DB URL: " + url);
-            System.out.println("DB USER: " + user);
+            // convert Railway format → JDBC format
+            String url = rawUrl.replace("mysql://", "jdbc:mysql://");
 
             con = DriverManager.getConnection(url, user, pass);
 
-            System.out.println("DATABASE CONNECTED SUCCESSFULLY");
+            System.out.println("DATABASE CONNECTED SUCCESSFULLY 🚀");
 
         } catch (Exception e) {
-            System.out.println("DATABASE CONNECTION FAILED");
+            System.out.println("DATABASE CONNECTION FAILED 💥");
             e.printStackTrace();
         }
 
