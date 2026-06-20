@@ -24,10 +24,13 @@ public class ConnectionClass {
             con = DriverManager.getConnection(url, user, pass);
 
             System.out.println("DATABASE CONNECTED SUCCESSFULLY 🚀");
+            System.out.println("MYSQL_URL = " + System.getenv("MYSQL_URL"));
+            System.out.println("MYSQLUSER = " + System.getenv("MYSQLUSER"));
+            System.out.println("MYSQLPASSWORD = " + System.getenv("MYSQLPASSWORD"));
 
         } catch (Exception e) {
-            System.out.println("DATABASE CONNECTION FAILED 💥");
-            e.printStackTrace();
+            System.out.println("🔥 DATABASE CONNECTION FAILED");
+            e.printStackTrace();   // THIS IS CRITICAL
         }
 
         return con;

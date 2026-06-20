@@ -41,31 +41,38 @@ public class User_impl implements USER_DAO {
 
 	@Override
 	public User getUser(String username) {
-		 Connection connection= ConnectionClass.getConnection();
 
-		
-		User user= new User();
-		String query= "SELECT * from user WHERE `username`= ? ";
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, username);
-			ResultSet resultSet= preparedStatement.executeQuery();
-			while(resultSet.next())
-			{
-				user.setUserId(resultSet.getInt(1));
-				user.setUsername(resultSet.getString(2));
-				user.setPassword(resultSet.getString(3));
-				user.setEmail(resultSet.getString(4));
-				user.setPhone(resultSet.getLong(5));
-				user.setAddress(resultSet.getString(6));
-				user.setRole(resultSet.getString(7));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user;
+	    Connection connection = ConnectionClass.getConnection();
 
+	    String query = "SELECT * FROM user WHERE username = ?";
+
+	    try {
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ps.setString(1, username);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        // 🔥 IMPORTANT: use IF, not WHILE
+	        if (rs.next()) {
+
+	            User user = new User();
+
+	            user.setUserId(rs.getInt(1));
+	            user.setUsername(rs.getString(2));
+	            user.setPassword(rs.getString(3));
+	            user.setEmail(rs.getString(4));
+	            user.setPhone(rs.getLong(5));
+	            user.setAddress(rs.getString(6));
+	            user.setRole(rs.getString(7));
+
+	            return user;
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return null; // 🔥 IMPORTANT
 	}
 
 	@Override
