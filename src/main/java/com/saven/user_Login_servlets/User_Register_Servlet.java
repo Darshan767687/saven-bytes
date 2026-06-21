@@ -18,6 +18,7 @@ public class User_Register_Servlet extends HttpServlet {
 
         // 🔥 DEPLOYMENT CHECK (RAILWAY LOG)
         System.out.println("🔥 REGISTER API HIT - DEPLOYED VERSION IS RUNNING");
+        System.out.println("🔥 REGISTER API HIT - VERSION 2.0.1");
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
