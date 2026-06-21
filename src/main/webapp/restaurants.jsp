@@ -186,20 +186,20 @@ a {
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
     <div class="card" data-aos="fade-up" data-aos-delay="<%=delay%>">
 
-        <%
-            String img = r.getImagePath();
-            String finalImg;
+<%
+    String img = r.getImagePath();
+    String finalImg;
 
-            if (img == null || img.trim().isEmpty()) {
-                finalImg = "https://via.placeholder.com/400x200?text=Food+Image";
-            }
-            else if (img.startsWith("http")) {
-                finalImg = img;
-            }
-            else {
-                finalImg = request.getContextPath() + "/images/" + img;
-            }
-        %>
+    if (img == null || img.trim().isEmpty()) {
+        finalImg = request.getContextPath() + "/images/fallback.jpg";
+    }
+    else if (img.startsWith("http")) {
+        finalImg = img;
+    }
+    else {
+        finalImg = request.getContextPath() + "/images/" + img;
+    }
+%>
 
         <img src="<%= finalImg %>" />
 
