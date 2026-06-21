@@ -101,6 +101,16 @@ header {
     object-fit: cover;
 }
 
+.fallback {
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f2f2;
+    color: #686b78;
+    font-size: 14px;
+}
+
 .card-body {
     padding: 14px 16px 18px;
 }
@@ -132,7 +142,10 @@ header {
 .rating.mid { background: #fa8c16; }
 .rating.low { background: #e74c3c; }
 
-a { text-decoration: none; color: inherit; }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 </style>
 </head>
 
@@ -173,26 +186,35 @@ a { text-decoration: none; color: inherit; }
             double rating = r.getRating();
             String ratingClass = rating >= 4.5 ? "high" : rating >= 3.8 ? "mid" : "low";
 
-            // DB image value (example: food-1685942_1280.jpg)
             String img = r.getImagePath();
+            boolean hasImage = (img != null && !img.trim().isEmpty());
 
-            // FINAL FIXED PATH (YOUR WORKING URL)
-            String finalImg = "http://localhost:8080/SAVEN_BITES/images/fallback.jpg";
+            String finalImg = hasImage
+                    ? request.getContextPath() + "/images/" + img.trim()
+                    : null;
 
-            if (img != null && !img.trim().isEmpty()) {
-                finalImg = "http://localhost:8080/SAVEN_BITES/images/" + img.trim();
-            }
-
-            // 🔥 DEBUG LOG (CHECK TOMCAT CONSOLE)
-            System.out.println("🖼 IMAGE DEBUG -> ID: " + r.getRestaurantId()
-                + " | DB: " + img
-                + " | FINAL: " + finalImg);
+            System.out.println("🖼 IMAGE DEBUG -> " + img + " | FINAL -> " + finalImg);
 %>
 
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
     <div class="card" data-aos="fade-up" data-aos-delay="<%=delay%>">
 
-        <img src="<%= finalImg %>" />
+        <% if (hasImage) { %>
+
+            <img src="<%= finalImg %>" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+
+            <div class="fallback" style="display:none;">
+                Image loading failed 🖼️
+            </div>
+
+        <% } else { %>
+
+            <div class="fallback">
+                No image available 🖼️
+            </div>
+
+        <% } %>
 
         <div class="card-body">
             <div class="name"><%= r.getName() %></div>
