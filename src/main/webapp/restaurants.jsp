@@ -7,10 +7,8 @@
 <head>
 <title>SAVEN BYTES | Order Food Online</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<!-- AOS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
@@ -29,7 +27,6 @@ body {
     color: var(--dark);
 }
 
-/* ===== HEADER ===== */
 header {
     position: sticky;
     top: 0;
@@ -54,7 +51,6 @@ header {
     color: var(--muted);
 }
 
-/* ===== HERO ===== */
 .hero {
     background: linear-gradient(135deg, #fff3e6, #ffffff);
     padding: 40px 36px 26px;
@@ -71,7 +67,6 @@ header {
     color: var(--muted);
 }
 
-/* ===== LIST ===== */
 .container {
     max-width: 1380px;
     margin: auto;
@@ -94,7 +89,6 @@ header {
     .restaurant-list { grid-template-columns: 1fr; }
 }
 
-/* ===== CARD ===== */
 .card {
     background: #fff;
     border-radius: 16px;
@@ -130,7 +124,6 @@ header {
     line-height: 1.4;
 }
 
-/* ===== RATING ===== */
 .rating {
     margin-top: 10px;
     display: inline-flex;
@@ -175,7 +168,16 @@ a {
     List<Restaurant> list = (List<Restaurant>) request.getAttribute("restaurants");
     int delay = 0;
 
-    if (list != null) {
+    if (list == null || list.isEmpty()) {
+%>
+
+        <div style="text-align:center; padding:50px; font-size:18px; color:#686b78;">
+            🍽️ No restaurants found right now
+        </div>
+
+<%
+    } else {
+
         for (Restaurant r : list) {
             delay += 70;
             double rating = r.getRating();
@@ -185,7 +187,7 @@ a {
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
     <div class="card" data-aos="fade-up" data-aos-delay="<%=delay%>">
 
-        <img src="<%= (r.getImagePath()==null || r.getImagePath().isEmpty())
+        <img src="<%= (r.getImagePath() == null || r.getImagePath().isEmpty())
             ? "https://via.placeholder.com/400x200?text=Food+Image"
             : r.getImagePath() %>">
 
