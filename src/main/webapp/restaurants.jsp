@@ -132,10 +132,7 @@ header {
 .rating.mid { background: #fa8c16; }
 .rating.low { background: #e74c3c; }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+a { text-decoration: none; color: inherit; }
 </style>
 </head>
 
@@ -176,22 +173,20 @@ a {
             double rating = r.getRating();
             String ratingClass = rating >= 4.5 ? "high" : rating >= 3.8 ? "mid" : "low";
 
-            // ✅ IMAGE FIX + DEBUG
+            // DB image value (example: food-1685942_1280.jpg)
             String img = r.getImagePath();
-            String finalImg;
 
-            if (img == null || img.trim().isEmpty()) {
-                finalImg = request.getContextPath() + "/images/fallback.jpg";
-            } else {
-                finalImg = request.getContextPath() + "/images/" + img.trim();
+            // FINAL FIXED PATH (YOUR WORKING URL)
+            String finalImg = "http://localhost:8080/SAVEN_BITES/images/fallback.jpg";
+
+            if (img != null && !img.trim().isEmpty()) {
+                finalImg = "http://localhost:8080/SAVEN_BITES/images/" + img.trim();
             }
 
-            // 🔥 DEBUG PRINTS (CHECK TOMCAT CONSOLE)
-            System.out.println("====================================");
-            System.out.println("🆔 Restaurant ID: " + r.getRestaurantId());
-            System.out.println("📁 DB Image Value: " + img);
-            System.out.println("🌐 FINAL IMAGE URL: " + finalImg);
-            System.out.println("====================================");
+            // 🔥 DEBUG LOG (CHECK TOMCAT CONSOLE)
+            System.out.println("🖼 IMAGE DEBUG -> ID: " + r.getRestaurantId()
+                + " | DB: " + img
+                + " | FINAL: " + finalImg);
 %>
 
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
@@ -222,11 +217,7 @@ a {
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-AOS.init({
-    duration: 700,
-    once: true,
-    easing: 'ease-out-cubic'
-});
+AOS.init({ duration: 700, once: true });
 </script>
 
 </body>
