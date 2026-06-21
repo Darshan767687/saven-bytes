@@ -21,6 +21,8 @@ public class User_Login_Servlet extends HttpServlet {
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        
+        System.out.println("🔥 REGISTER API HIT - VERSION 2.0.1");
 
         User user = User_Service.getUser(username);
 
