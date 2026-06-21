@@ -187,9 +187,7 @@ a {
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
     <div class="card" data-aos="fade-up" data-aos-delay="<%=delay%>">
 
-        <img src="<%= (r.getImagePath() == null || r.getImagePath().isEmpty())
-            ? "https://via.placeholder.com/400x200?text=Food+Image"
-            : r.getImagePath() %>">
+        <img src="<%= request.getContextPath() + "/images/" + r.getImagePath() %>">
 
         <div class="card-body">
             <div class="name"><%= r.getName() %></div>
