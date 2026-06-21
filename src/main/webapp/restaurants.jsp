@@ -8,7 +8,6 @@
 <title>SAVEN BYTES | Order Food Online</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
@@ -187,7 +186,22 @@ a {
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
     <div class="card" data-aos="fade-up" data-aos-delay="<%=delay%>">
 
-        <img src="<%= request.getContextPath() + "/images/" + r.getImagePath() %>">
+        <%
+            String img = r.getImagePath();
+            String finalImg;
+
+            if (img == null || img.trim().isEmpty()) {
+                finalImg = "https://via.placeholder.com/400x200?text=Food+Image";
+            }
+            else if (img.startsWith("http")) {
+                finalImg = img;
+            }
+            else {
+                finalImg = request.getContextPath() + "/images/" + img;
+            }
+        %>
+
+        <img src="<%= finalImg %>" />
 
         <div class="card-body">
             <div class="name"><%= r.getName() %></div>
