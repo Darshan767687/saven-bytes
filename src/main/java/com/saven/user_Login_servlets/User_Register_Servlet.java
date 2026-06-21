@@ -32,10 +32,10 @@ public class User_Register_Servlet extends HttpServlet {
 
         User_Service service = new User_Service();
 
+        // 🔥 SAFE CHECK (NO NULL CRASH EVER)
         User existingUser = service.getUser(username);
 
-        // 🔥 SAFE CHECK (NO NULL CRASH POSSIBLE)
-        if (existingUser == null || existingUser.getUsername() == null) {
+        if (existingUser == null) {
 
             User newUser = new User(username, password, email, phone, address, role);
             service.addUser(newUser);
