@@ -16,11 +16,12 @@ public class User_Register_Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        // 🔥 DEPLOYMENT CHECK (RAILWAY LOG)
+        System.out.println("🔥 REGISTER API HIT - DEPLOYED VERSION IS RUNNING");
+
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
-        String address = req.getParameter("address");
-        String role = "Customer";
 
         long phone;
         try {
@@ -30,19 +31,22 @@ public class User_Register_Servlet extends HttpServlet {
             return;
         }
 
-        User_Service service = new User_Service();
+        String address = req.getParameter("address");
+        String role = "Customer";
 
-        // 🔥 SAFE CHECK (NO NULL CRASH EVER)
-        User existingUser = service.getUser(username);
+        User_Service user_service = new User_Service();
+
+        // 🔥 CHECK EXISTING USER
+        User existingUser = user_service.getUser(username);
 
         if (existingUser == null) {
 
             User newUser = new User(username, password, email, phone, address, role);
-            service.addUser(newUser);
+            user_service.addUser(newUser);
 
             resp.sendRedirect("index.html?success=registered");
-
         } else {
+
             resp.sendRedirect("Registration.html?error=username_taken");
         }
     }
