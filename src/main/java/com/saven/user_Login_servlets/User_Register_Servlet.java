@@ -20,7 +20,7 @@ public class User_Register_Servlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
 
-        long phone = 0;
+        long phone;
         try {
             phone = Long.parseLong(req.getParameter("phone"));
         } catch (Exception e) {
@@ -33,16 +33,18 @@ public class User_Register_Servlet extends HttpServlet {
 
         User_Service user_service = new User_Service();
 
-        // 🔥 FIX: handle null safely
+        // ✅ ONLY CHECK NULL OBJECT
         User existingUser = user_service.getUser(username);
 
-        if (existingUser == null || existingUser.getUsername() == null) {
+        if (existingUser == null) {
 
             User newUser = new User(username, password, email, phone, address, role);
             user_service.addUser(newUser);
 
             resp.sendRedirect("index.html?success=registered");
+
         } else {
+
             resp.sendRedirect("Registration.html?error=username_taken");
         }
     }
