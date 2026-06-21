@@ -78,15 +78,9 @@ header {
     gap: 26px;
 }
 
-@media (max-width: 1200px) {
-    .restaurant-list { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 900px) {
-    .restaurant-list { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-    .restaurant-list { grid-template-columns: 1fr; }
-}
+@media (max-width: 1200px) { .restaurant-list { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) { .restaurant-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .restaurant-list { grid-template-columns: 1fr; } }
 
 .card {
     background: #fff;
@@ -120,7 +114,6 @@ header {
 .meta {
     font-size: 0.88rem;
     color: var(--muted);
-    line-height: 1.4;
 }
 
 .rating {
@@ -179,27 +172,30 @@ a {
 
         for (Restaurant r : list) {
             delay += 70;
+
             double rating = r.getRating();
             String ratingClass = rating >= 4.5 ? "high" : rating >= 3.8 ? "mid" : "low";
+
+            // ✅ IMAGE FIX + DEBUG
+            String img = r.getImagePath();
+            String finalImg;
+
+            if (img == null || img.trim().isEmpty()) {
+                finalImg = request.getContextPath() + "/images/fallback.jpg";
+            } else {
+                finalImg = request.getContextPath() + "/images/" + img.trim();
+            }
+
+            // 🔥 DEBUG PRINTS (CHECK TOMCAT CONSOLE)
+            System.out.println("====================================");
+            System.out.println("🆔 Restaurant ID: " + r.getRestaurantId());
+            System.out.println("📁 DB Image Value: " + img);
+            System.out.println("🌐 FINAL IMAGE URL: " + finalImg);
+            System.out.println("====================================");
 %>
 
 <a href="menu?restaurantId=<%= r.getRestaurantId() %>">
     <div class="card" data-aos="fade-up" data-aos-delay="<%=delay%>">
-
-<%
-    String img = r.getImagePath();
-    String finalImg;
-
-    if (img == null || img.trim().isEmpty()) {
-        finalImg = request.getContextPath() + "/images/fallback.jpg";
-    }
-    else if (img.startsWith("http")) {
-        finalImg = img;
-    }
-    else {
-        finalImg = request.getContextPath() + "/images/" + img;
-    }
-%>
 
         <img src="<%= finalImg %>" />
 
