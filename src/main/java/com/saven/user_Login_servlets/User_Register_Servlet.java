@@ -19,6 +19,8 @@ public class User_Register_Servlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
+        String address = req.getParameter("address");
+        String role = "Customer";
 
         long phone;
         try {
@@ -28,23 +30,19 @@ public class User_Register_Servlet extends HttpServlet {
             return;
         }
 
-        String address = req.getParameter("address");
-        String role = "Customer";
+        User_Service service = new User_Service();
 
-        User_Service user_service = new User_Service();
+        User existingUser = service.getUser(username);
 
-        // ✅ ONLY CHECK NULL OBJECT
-        User existingUser = user_service.getUser(username);
-
-        if (existingUser == null) {
+        // 🔥 SAFE CHECK (NO NULL CRASH POSSIBLE)
+        if (existingUser == null || existingUser.getUsername() == null) {
 
             User newUser = new User(username, password, email, phone, address, role);
-            user_service.addUser(newUser);
+            service.addUser(newUser);
 
             resp.sendRedirect("index.html?success=registered");
 
         } else {
-
             resp.sendRedirect("Registration.html?error=username_taken");
         }
     }
